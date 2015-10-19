@@ -206,8 +206,13 @@ public class TransportSessionBean {
 
     //Get Location By Id   
         
-        public org.w3c.dom.Document getLocationById(int locId) throws Exception{
+        public org.w3c.dom.Document getLocationById(String encodedInput) throws Exception{
             
+             encodedString = encodedInput; 
+             Base64.Decoder decoder = Base64.getDecoder();
+             byte[] decodedByteArray = decoder.decode(encodedString);
+             input=new String(decodedByteArray);
+             int locId = Integer.parseInt(input);
              
              String xmlData="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?><LOCATION>",xmlHolder="";
              Location l=em.find(Location.class, locId);
@@ -229,7 +234,14 @@ public class TransportSessionBean {
 
     //Get SubLocation By Id   
         
-        public org.w3c.dom.Document getSubLocationById(int subLocationId) throws Exception{
+        public org.w3c.dom.Document getSubLocationById(String encodedInput) throws Exception{
+            
+             encodedString = encodedInput; 
+             Base64.Decoder decoder = Base64.getDecoder();
+             byte[] decodedByteArray = decoder.decode(encodedString);
+             input=new String(decodedByteArray);
+             int subLocationId = Integer.parseInt(input);
+             
             String xmlData="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?><SUBLOCATION>",xmlHolder="";
             SubLocation sl=new SubLocation();
             Query q=em.createQuery("SELECT sl FROM SubLocation sl where sl.subLocationId=:subLocationId");
@@ -325,8 +337,13 @@ public class TransportSessionBean {
 
         
     //One Main Location and its corresponding subLocation
-        public org.w3c.dom.Document subLocListToSpecificLocId(int locId) throws Exception{
+        public org.w3c.dom.Document subLocListToSpecificLocId(String encodedInput) throws Exception{
              
+             encodedString = encodedInput; 
+             Base64.Decoder decoder = Base64.getDecoder();
+             byte[] decodedByteArray = decoder.decode(encodedString);
+             input=new String(decodedByteArray);
+             int locId = Integer.parseInt(input); 
              
             
             String xmlData="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?><LOCATION>",xmlHolder="";

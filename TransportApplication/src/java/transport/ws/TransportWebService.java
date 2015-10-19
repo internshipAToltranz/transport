@@ -44,6 +44,7 @@ public class TransportWebService {
     private TransportSessionBean tsb;
     String encodedSubLocName="";
     String encodedSubLocId="";
+    String encodedLocId="";
     //Adding new location
     @POST
     @Path("addnewlocation")
@@ -158,7 +159,10 @@ public class TransportWebService {
     @Produces(MediaType.APPLICATION_XML)
     public org.w3c.dom.Document getLocationById(@PathParam("locationId")int locId) throws Exception{
         
-        org.w3c.dom.Document doc=tsb.getLocationById(locId);
+        String s=Integer.toString(locId);
+        Base64.Encoder encoder = Base64.getEncoder();
+        encodedLocId = encoder.encodeToString(s.getBytes(StandardCharsets.UTF_8) );
+        org.w3c.dom.Document doc=tsb.getLocationById(encodedLocId);
         
         return doc;
      } 
@@ -169,7 +173,10 @@ public class TransportWebService {
     @Produces(MediaType.APPLICATION_XML)
     public org.w3c.dom.Document getSubLocationById(@PathParam("subLocationId")int subLocationId) throws Exception{
         
-        org.w3c.dom.Document doc=tsb.getSubLocationById(subLocationId);
+        String s=Integer.toString(subLocationId);
+        Base64.Encoder encoder = Base64.getEncoder();
+        encodedLocId = encoder.encodeToString(s.getBytes(StandardCharsets.UTF_8) );
+        org.w3c.dom.Document doc=tsb.getSubLocationById(encodedLocId);
         return doc;
         
      } 
@@ -209,8 +216,10 @@ public class TransportWebService {
     public org.w3c.dom.Document subLocListToSpecificLocId(@PathParam("locationId") int locId) throws Exception{
         
         
-        
-        org.w3c.dom.Document doc=tsb.subLocListToSpecificLocId(locId);
+        String s=Integer.toString(locId);
+        Base64.Encoder encoder = Base64.getEncoder();
+        encodedLocId = encoder.encodeToString(s.getBytes(StandardCharsets.UTF_8) );
+        org.w3c.dom.Document doc=tsb.subLocListToSpecificLocId(encodedLocId);
         
         return doc;
         
